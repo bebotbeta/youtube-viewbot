@@ -23,7 +23,7 @@ def getViews(proxy):
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     options.add_argument('--proxy-server=%s' %proxy)
-    options.add_argument('--window-size=640,480')
+    options.add_argument('--window-size=320,240')
     try:
         driver = Chrome(executable_path='./chromedriver.exe', options=options)
         driver.get(url)

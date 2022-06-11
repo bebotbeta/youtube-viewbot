@@ -2,7 +2,7 @@
 import concurrent.futures
 from os import system
 from platform import system as cos
-
+import time
 from selenium.webdriver import Chrome, ChromeOptions
 
 
@@ -37,23 +37,25 @@ def getProxy(url):
     driver.quit()
 
 
+while True:
 
-clear()
-print('[...]\tGetting Proxies from www.freeproxylists.net')
-# executing getProxy() parallelly
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    executor.map(getProxy, urls)
-clear()
-print('[DONE]\tGetting Proxies from www.freeproxylists.net')
-
-
-# removing duplicate proxies
-proxies = list(set(proxies))
-print('[***]\tTotal Proxies Found :', len(proxies))
+    clear()
+    print('[...]\tGetting Proxies from www.freeproxylists.net')
+    # executing getProxy() parallelly
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        executor.map(getProxy, urls)
+    clear()
+    print('[DONE]\tGetting Proxies from www.freeproxylists.net')
 
 
-# writing proxies to file
-with open('proxy-list.txt', 'w+') as f:
-    for i in range(len(proxies)):
-        f.write(proxies[i]+'\n')
-print('[DONE]\tGenerated "proxy-list.txt"')
+    # removing duplicate proxies
+    proxies = list(set(proxies))
+    print('[***]\tTotal Proxies Found :', len(proxies))
+
+
+    # writing proxies to file
+    with open('proxy-list.txt', 'a+') as f:
+        for i in range(len(proxies)):
+            f.write(proxies[i]+'\n')
+    print('[DONE]\tGenerated "proxy-list.txt"')
+    time.sleep(30)
